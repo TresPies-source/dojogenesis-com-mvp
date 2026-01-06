@@ -1,0 +1,56 @@
+{
+  "type": "card",
+  "id": "hello_agent_widget",
+  "title": "Welcome to Dojo Genesis",
+  "text": "Dojo Genesis helps you think by collecting perspectives before solutions. Bring a real situation. Add 3 lenses. Get a clean next move.",
+  "buttons": [
+    {
+      "text": "Start with a real situation",
+      "action": {
+        "type": "start_situation",
+        "handler": "client"
+      },
+      "style": "primary"
+    },
+    {
+      "text": "Add 3 perspectives",
+      "action": {
+        "type": "add_perspectives",
+        "handler": "client"
+      },
+      "style": "secondary"
+    },
+    {
+      "text": "Show me an example",
+      "action": {
+        "type": "show_example",
+        "handler": "client"
+      },
+      "style": "secondary"
+    },
+    {
+      "text": "I'm stuck—help me frame it",
+      "action": {
+        "type": "help_frame",
+        "handler": "client"
+      },
+      "style": "secondary"
+    },
+    {
+      "text": "Generate a next move",
+      "action": {
+        "type": "generate_move",
+        "handler": "client"
+      },
+      "style": "primary"
+    },
+    {
+      "text": "Pick an output",
+      "action": {
+        "type": "pick_output",
+        "handler": "client"
+      },
+      "style": "secondary"
+    }
+  ]
+}
