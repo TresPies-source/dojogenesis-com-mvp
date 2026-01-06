@@ -131,14 +131,14 @@ export function ChatKitDemo() {
     return (
       <div 
         data-testid="chatkit-demo" 
-        className="flex items-center justify-center min-h-[600px] bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200"
+        className="flex items-center justify-center min-h-[500px] md:min-h-[600px] bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200 p-4"
         role="alert"
         aria-live="assertive"
       >
-        <div className="text-center space-y-4 max-w-md px-6">
-          <div className="w-16 h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center" aria-hidden="true">
+        <div className="text-center space-y-4 max-w-md">
+          <div className="w-14 h-14 md:w-16 md:h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center" aria-hidden="true">
             <svg
-              className="w-8 h-8 text-red-600"
+              className="w-7 h-7 md:w-8 md:h-8 text-red-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -152,12 +152,12 @@ export function ChatKitDemo() {
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Unable to Start Session</h3>
-            <p className="text-gray-700 text-sm leading-relaxed">{error}</p>
+            <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-2">Unable to Start Session</h3>
+            <p className="text-gray-700 text-xs md:text-sm leading-relaxed">{error}</p>
           </div>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all font-medium"
+            className="px-5 md:px-6 py-2 bg-red-600 text-white text-sm md:text-base rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all font-medium"
             aria-label="Reload page to try again"
           >
             Try Again

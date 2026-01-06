@@ -92,3 +92,18 @@
     white-space: normal;
   }
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+  }
+}
