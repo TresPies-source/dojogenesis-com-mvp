@@ -52,3 +52,28 @@ This file will be automatically picked up by TypeScript (already configured in `
 1. Create `env.d.ts` file with the CloudflareEnv extension
 2. Run build command to verify TypeScript compilation succeeds
 3. No functional tests needed (type-only change)
+
+## Implementation Notes
+
+### Fix Applied
+Created `env.d.ts` at project root with the following content:
+```typescript
+declare global {
+  interface CloudflareEnv {
+    OPENAI_API_KEY: string;
+  }
+}
+
+export {};
+```
+
+**Key Discovery**: The `CloudflareEnv` interface is declared globally by `@cloudflare/next-on-pages`, not as a module export. Therefore, the correct approach is to use `declare global` instead of `declare module`. The `export {}` statement is required to make TypeScript treat this as a module file, which is necessary for global declarations to work properly.
+
+### Test Results
+✅ Build completed successfully with no TypeScript errors
+- Command: `npm run build`
+- Exit code: 0
+- All routes compiled successfully
+- Static pages generated without errors
+
+The fix is type-only and does not affect runtime behavior.
