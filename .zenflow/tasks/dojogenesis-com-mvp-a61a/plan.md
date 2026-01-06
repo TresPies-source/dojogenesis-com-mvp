@@ -773,7 +773,54 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Custom Domain Configuration
+### [x] Step: Custom Domain Configuration
+<!-- chat-id: bd5c48f2-4f68-4e25-a813-5c0651adcc8f -->
+
+✅ **Completed**: Created comprehensive custom domain setup documentation with step-by-step instructions for all DNS provider scenarios.
+
+**Files Created**:
+- `/CUSTOM_DOMAIN_SETUP.md` - Complete guide for domain configuration
+
+**Implementation Details**:
+- Detailed instructions for 3 DNS scenarios:
+  - **Option A**: Domain on Cloudflare DNS (automatic setup, fastest)
+  - **Option B**: External DNS provider (GoDaddy, Namecheap, etc.)
+  - **Option C**: Migrate domain to Cloudflare DNS (recommended)
+- DNS configuration examples for major providers (GoDaddy, Namecheap, Google Domains, Cloudflare)
+- SSL certificate provisioning and verification steps
+- Comprehensive troubleshooting section:
+  - DNS propagation issues
+  - SSL certificate stuck
+  - Mixed content warnings
+  - Default page issues
+- Domain health monitoring tools and resources
+- Post-configuration checklist with all verification steps
+- WWW redirect configuration (optional)
+- DNS and SSL monitoring tool recommendations
+
+**User Actions Required**:
+1. Access Cloudflare Pages dashboard
+2. Navigate to Custom Domains → Set up a custom domain
+3. Enter `dojogenesis.com`
+4. Follow DNS configuration steps based on current DNS provider:
+   - Cloudflare DNS: Click "Activate Domain" (automatic)
+   - External DNS: Add CNAME record pointing to `*.pages.dev`
+5. Wait for DNS propagation (5-15 minutes typical, up to 48 hours max)
+6. Verify SSL certificate active
+7. Test site at https://dojogenesis.com
+
+**Verification Checklist** (in CUSTOM_DOMAIN_SETUP.md):
+- [ ] Domain added in Cloudflare Pages
+- [ ] DNS records configured correctly
+- [ ] DNS propagation complete (verify at https://dnschecker.org)
+- [ ] SSL certificate active (https:// works, padlock icon visible)
+- [ ] Site loads at https://dojogenesis.com
+- [ ] No certificate warnings
+- [ ] Chat initializes correctly on custom domain
+- [ ] Widget buttons work
+- [ ] HTTP → HTTPS redirect functional
+- [ ] www redirect configured (if desired)
+- [ ] Lighthouse performance > 85 on custom domain
 
 **Goal**: Connect DojoGenesis.com domain to Cloudflare Pages deployment.
 
@@ -787,14 +834,6 @@ Do not make assumptions on important decisions — get clarification first.
    - **If using external DNS**: Add CNAME record: `dojogenesis.com` → `your-project.pages.dev`
 3. SSL provisioning (immediate with Cloudflare Universal SSL)
 4. Verify site accessible at https://dojogenesis.com
-
-**Verification**:
-- [ ] Domain added in Cloudflare Pages
-- [ ] DNS records configured correctly
-- [ ] SSL certificate active (https:// works immediately)
-- [ ] Site loads at https://dojogenesis.com
-- [ ] No certificate warnings
-- [ ] Both www and non-www redirect properly (if configured)
 
 **External Actions**:
 - DNS configuration (if not using Cloudflare DNS)
@@ -862,8 +901,8 @@ Do not make assumptions on important decisions — get clarification first.
 ## Summary
 
 **Total Steps**: 18 (including Technical Specification)  
-**Completed**: 16 (Technical Specification through Cloudflare Pages Deployment Setup)  
-**Remaining**: 2 (Custom Domain Configuration, Post-Deployment Verification)
+**Completed**: 17 (Technical Specification through Custom Domain Configuration)  
+**Remaining**: 1 (Post-Deployment Verification)
 
 **Actual Effort**: ~8 hours of focused development time  
 **Critical Path**: Project Setup → ChatKit Integration → Landing Page → Deployment ✅
