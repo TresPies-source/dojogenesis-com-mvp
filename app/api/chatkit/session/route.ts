@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       console.error('[ChatKit Session] OPENAI_API_KEY not configured');
       return NextResponse.json(
-        { error: 'Server configuration error', message: 'API key not configured' },
+        { error: 'Server configuration error', message: 'We\'re experiencing technical difficulties. Please try again later.' },
         { status: 500 }
       );
     }
