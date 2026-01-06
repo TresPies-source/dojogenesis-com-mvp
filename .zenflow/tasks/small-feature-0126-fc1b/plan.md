@@ -120,6 +120,7 @@ Create `{@artifacts_path}/report.md` documenting:
 ---
 
 ### [ ] Step: Merge to Main
+<!-- chat-id: 017eac21-2dec-407b-8de8-e287eafaee70 -->
 
 After all verification passes:
 1. Review all changes
