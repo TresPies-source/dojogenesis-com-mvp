@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useContainerSize, type ContainerSize } from '@/lib/use-container-size';
 import { Button } from '@/components/ui/button';
 
@@ -10,7 +11,7 @@ const SIZE_LABELS: Record<ContainerSize, string> = {
   fullscreen: 'Fullscreen',
 };
 
-const SIZE_ICONS: Record<ContainerSize, JSX.Element> = {
+const SIZE_ICONS: Record<ContainerSize, React.ReactElement> = {
   mobile: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
