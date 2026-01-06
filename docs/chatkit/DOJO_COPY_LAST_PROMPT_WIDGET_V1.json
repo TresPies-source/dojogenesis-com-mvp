@@ -1,0 +1,122 @@
+{
+  "type": "Card",
+  "key": "dojo_copy_last_prompt_v1",
+  "size": "md",
+  "status": { "text": "Dojo Genesis • Clipboard Tool" },
+  "children": [
+    {
+      "type": "Row",
+      "key": "header_row",
+      "align": "center",
+      "justify": "between",
+      "gap": 8,
+      "children": [
+        {
+          "type": "Title",
+          "key": "title",
+          "value": "Copy your last prompt",
+          "size": "lg",
+          "weight": "bold"
+        },
+        {
+          "type": "Badge",
+          "key": "badge",
+          "label": "Fast handoff",
+          "variant": "soft",
+          "color": "discovery",
+          "pill": true,
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "type": "Markdown",
+      "key": "core_copy",
+      "value": "**Move ideas out of chat.**\n\nCopy your most recent prompt so you can paste it into GitHub issues, docs, Zenflow tasks, or anywhere else."
+    },
+    {
+      "type": "Divider",
+      "key": "divider_1",
+      "spacing": 10
+    },
+    {
+      "type": "Markdown",
+      "key": "micro_explain",
+      "value": "**What gets copied:** your last message (the most recent user prompt).\n\n**Tip:** if your last message is short, use the "with context" option."
+    },
+    {
+      "type": "Divider",
+      "key": "divider_2",
+      "spacing": 10
+    },
+    {
+      "type": "Col",
+      "key": "button_stack",
+      "gap": 8,
+      "children": [
+        {
+          "type": "Button",
+          "key": "btn_copy_last_prompt",
+          "label": "Copy last prompt",
+          "variant": "solid",
+          "color": "primary",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.copy.last_prompt",
+            "payload": {
+              "scope": "last_user_message",
+              "format": "text"
+            },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_copy_last_prompt_with_context",
+          "label": "Copy last prompt (with context)",
+          "variant": "soft",
+          "color": "discovery",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.copy.last_prompt",
+            "payload": {
+              "scope": "last_user_message_with_context",
+              "format": "markdown",
+              "include": {
+                "timestamp": true,
+                "conversation_title": false,
+                "last_assistant_summary": true
+              }
+            },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_copy_last_exchange",
+          "label": "Copy last exchange (prompt + reply)",
+          "variant": "outline",
+          "color": "secondary",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.copy.last_exchange",
+            "payload": {
+              "scope": "last_turn",
+              "format": "markdown"
+            },
+            "loading": "container"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Caption",
+      "key": "caption",
+      "value": "After you click, the app should show "Copied ✓" briefly and place the text on your clipboard.",
+      "size": "sm"
+    }
+  ]
+}

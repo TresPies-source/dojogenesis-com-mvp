@@ -1,0 +1,10 @@
+# Cloudflare Pages ignore file
+# Exclude cache and unnecessary files from deployment
+
+.next/cache
+node_modules
+.git
+.env.local
+.env*.local
+*.log
+.DS_Store
