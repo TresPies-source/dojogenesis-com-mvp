@@ -95,30 +95,30 @@ export function ChatKitDemo() {
     return (
       <div 
         data-testid="chatkit-demo" 
-        className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm p-6 space-y-4"
+        className="w-full min-h-[500px] md:min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm p-4 md:p-6 space-y-4"
         role="status"
         aria-live="polite"
         aria-label="Loading Dojo Genesis chat interface"
       >
-        <div className="flex items-center gap-3 mb-6">
-          <Skeleton className="h-10 w-10 rounded-full" />
+        <div className="flex items-center gap-3 mb-4 md:mb-6">
+          <Skeleton className="h-8 w-8 md:h-10 md:w-10 rounded-full" />
           <div className="space-y-2 flex-1">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-3 w-48" />
+            <Skeleton className="h-3 md:h-4 w-24 md:w-32" />
+            <Skeleton className="h-2 md:h-3 w-36 md:w-48" />
           </div>
         </div>
         <div className="space-y-3">
-          <Skeleton className="h-16 w-full" />
-          <Skeleton className="h-16 w-3/4" />
-          <Skeleton className="h-16 w-5/6" />
+          <Skeleton className="h-12 md:h-16 w-full" />
+          <Skeleton className="h-12 md:h-16 w-3/4" />
+          <Skeleton className="h-12 md:h-16 w-5/6" />
         </div>
-        <div className="flex items-center justify-center py-12">
-          <div className="text-center space-y-4">
-            <div className="relative w-12 h-12 mx-auto">
+        <div className="flex items-center justify-center py-8 md:py-12">
+          <div className="text-center space-y-3 md:space-y-4">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 mx-auto">
               <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
               <div className="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
             </div>
-            <p className="text-sm text-muted-foreground font-medium">
+            <p className="text-xs md:text-sm text-muted-foreground font-medium px-4">
               Preparing your Dojo Genesis session...
             </p>
           </div>
@@ -174,13 +174,13 @@ export function ChatKitDemo() {
   return (
     <div 
       data-testid="chatkit-demo" 
-      className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
+      className="w-full min-h-[500px] md:min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
       role="region"
       aria-label="Dojo Genesis chat interface"
     >
       <div 
         id="chatkit-container" 
-        className="w-full h-full min-h-[600px]"
+        className="w-full h-full min-h-[500px] md:min-h-[600px]"
         role="application"
         aria-label="ChatKit conversation interface"
       />
