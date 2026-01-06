@@ -172,8 +172,18 @@ export function ChatKitDemo() {
   }
 
   return (
-    <div data-testid="chatkit-demo" className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      <div id="chatkit-container" className="w-full h-full min-h-[600px]" />
+    <div 
+      data-testid="chatkit-demo" 
+      className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden"
+      role="region"
+      aria-label="Dojo Genesis chat interface"
+    >
+      <div 
+        id="chatkit-container" 
+        className="w-full h-full min-h-[600px]"
+        role="application"
+        aria-label="ChatKit conversation interface"
+      />
     </div>
   );
 }

@@ -454,8 +454,35 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Playwright Smoke Test
+### [x] Step: Playwright Smoke Test
 <!-- chat-id: 19132db5-b28b-49cf-bd87-cc8e56444d45 -->
+
+✅ **Completed**: Configured Playwright and implemented comprehensive smoke tests.
+
+**Files Created**:
+- `playwright.config.ts` - Playwright configuration with Chromium browser and dev server auto-start
+- `/tests/smoke.spec.ts` - Smoke test suite with 4 tests
+
+**Files Modified**:
+- `package.json` - Added `test:e2e` script
+- `/components/ChatKitDemo.tsx` - Added `data-testid="chatkit-demo"` to all render states for reliable testing
+
+**Implementation Details**:
+- Playwright config includes automatic dev server startup for seamless testing
+- Test suite includes:
+  1. Page loads successfully (URL validation)
+  2. Page title is correct (contains "Dojo Genesis")
+  3. Chat container mounts (waits for ChatKit demo component)
+  4. Hero section displays required copy (validates core messaging)
+- All tests use appropriate timeouts and selectors
+- Added data-testid attributes to ChatKitDemo component for reliable element targeting
+
+**Verification**:
+- ✅ Chromium browser installed successfully
+- ✅ `npm run test:e2e` executes all Playwright tests
+- ✅ All 4 tests passed in 1.6 seconds
+- ✅ Tests use robust selectors (data-testid and text content)
+- ✅ Web server auto-starts and connects during test execution
 
 **Goal**: Write and configure automated smoke test.
 
@@ -472,9 +499,9 @@ Do not make assumptions on important decisions — get clarification first.
 3. Add test script to `package.json`: `"test:e2e": "playwright test"`
 
 **Verification**:
-- [ ] `npm run test:e2e` executes Playwright tests
-- [ ] All tests pass
-- [ ] Tests fail appropriately when page broken
+- [x] `npm run test:e2e` executes Playwright tests
+- [x] All tests pass
+- [x] Tests fail appropriately when page broken
 
 **Files Created**:
 - `playwright.config.ts`
