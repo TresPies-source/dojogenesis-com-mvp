@@ -51,7 +51,8 @@ Save to `{@artifacts_path}/plan.md`. If the feature is trivial and doesn't warra
 
 ---
 
-### [ ] Step: Create Container Size Hook
+### [x] Step: Create Container Size Hook
+<!-- chat-id: 0687ba07-ab7b-47d7-acee-997fb96cfdd8 -->
 
 Create `lib/use-container-size.ts` with:
 - Type definitions for ContainerSize
