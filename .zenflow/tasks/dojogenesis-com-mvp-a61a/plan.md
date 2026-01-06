@@ -354,7 +354,7 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Landing Page - Footer Component
+### [x] Step: Landing Page - Footer Component
 <!-- chat-id: e148ee5e-f876-4d7a-9f9c-604347ae350f -->
 
 **Goal**: Create footer with privacy statement and links.
