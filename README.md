@@ -181,70 +181,21 @@ npm run test:e2e
 
 ### Deploy to Cloudflare Pages
 
-**Why Cloudflare Pages?**
-- Full Next.js support with App Router and API routes
-- Free tier with unlimited requests and bandwidth
-- Global CDN with 300+ locations
-- Instant SSL provisioning
-- GitHub integration with automatic deployments
+**Quick Start:**
 
-#### Option 1: GitHub Integration (Recommended)
+1. Push code to GitHub
+2. Connect repository to Cloudflare Pages
+3. Configure build settings:
+   - **Build command**: `npm run pages:build`
+   - **Build output**: `.vercel/output/static`
+4. Add environment variable: `OPENAI_API_KEY`
+5. Deploy
 
-1. **Push code to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/dojogenesis-com-mvp.git
-   git push -u origin main
-   ```
+**📚 Full deployment guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md)
 
-2. **Create Cloudflare Pages Project**:
-   - Visit https://dash.cloudflare.com
-   - Navigate to **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
-   - Authorize GitHub and select your repository
-   - Configure build settings:
-     - **Build command**: `npm run build`
-     - **Build output directory**: `.next`
-     - **Framework preset**: Next.js (auto-detected)
+**🔧 Build configuration reference**: See [BUILD_CONFIG.md](./BUILD_CONFIG.md)
 
-3. **Configure Environment Variables**:
-   - In Cloudflare Pages project settings → **Environment Variables**
-   - Add `OPENAI_API_KEY` with your API key (mark as encrypted)
-   - Optionally add `NODE_VERSION=20`
-
-4. **Deploy**:
-   - Push to `main` branch triggers automatic deployment
-   - View deployment at `your-project.pages.dev`
-
-#### Option 2: Wrangler CLI
-
-```bash
-# Install Wrangler CLI globally
-npm install -g wrangler
-
-# Login to Cloudflare
-wrangler login
-
-# Build the project
-npm run build
-
-# Deploy to Cloudflare Pages
-wrangler pages deploy .next --project-name=dojogenesis-com-mvp
-```
-
-### Custom Domain Setup
-
-1. In Cloudflare Pages dashboard, navigate to your project → **Custom Domains**
-2. Click **Set up a custom domain**
-3. Enter: `dojogenesis.com`
-4. **If using Cloudflare DNS**: Click "Activate Domain" (automatic setup)
-5. **If using external DNS**: Add CNAME record:
-   - Name: `dojogenesis.com`
-   - Target: `your-project.pages.dev`
-6. SSL provisioning is immediate with Cloudflare Universal SSL
-7. Verify site accessible at https://dojogenesis.com
+**🌐 Custom domain setup**: See [CUSTOM_DOMAIN_SETUP.md](./CUSTOM_DOMAIN_SETUP.md)
 
 ---
 
@@ -324,10 +275,16 @@ wrangler pages deploy .next --project-name=dojogenesis-com-mvp
 
 ## Project Documentation
 
-- **Product Requirements**: `/docs/PRD_DOJOGENESIS_MVP.md`
-- **Technical Specification**: `/docs/TECH_SPEC_DOJOGENESIS_MVP.md`
-- **Widget Specification**: `/docs/chatkit/HELLO_WIDGET_OPTION_A.json`
-- **Actions Mapping**: `/docs/chatkit/ACTIONS_MAP.md`
+### Core Documentation
+- **[Deployment Guide](./DEPLOYMENT.md)** - Complete deployment instructions for Cloudflare Pages
+- **[Build Configuration](./BUILD_CONFIG.md)** - Build commands, environment variables, and configuration reference
+- **[Custom Domain Setup](./CUSTOM_DOMAIN_SETUP.md)** - Configure custom domain with Cloudflare Pages
+
+### Product & Technical Specs
+- **Product Requirements**: [docs/PRD_DOJOGENESIS_MVP.md](./docs/PRD_DOJOGENESIS_MVP.md)
+- **Technical Specification**: [docs/TECH_SPEC_DOJOGENESIS_MVP.md](./docs/TECH_SPEC_DOJOGENESIS_MVP.md)
+- **Widget Specification**: [docs/chatkit/](./docs/chatkit/)
+- **Actions Mapping**: [docs/chatkit/ACTIONS_MAP.md](./docs/chatkit/ACTIONS_MAP.md)
 
 ---
 
