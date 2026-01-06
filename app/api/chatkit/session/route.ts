@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
@@ -16,7 +17,14 @@ interface ChatKitSessionResponse {
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.OPENAI_API_KEY;
+    let apiKey: string | undefined;
+    
+    try {
+      const { env } = getRequestContext();
+      apiKey = env.OPENAI_API_KEY;
+    } catch {
+      apiKey = process.env.OPENAI_API_KEY;
+    }
     
     if (!apiKey) {
       console.error('[ChatKit Session] OPENAI_API_KEY not configured');
