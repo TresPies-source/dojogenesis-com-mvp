@@ -66,8 +66,8 @@ git push -u origin dojogenesis-com-mvp-a61a
    Project name:         dojogenesis
    Production branch:    dojogenesis-com-mvp-a61a (or main)
    Framework preset:     Next.js (SSR)
-   Build command:        npm run build
-   Build output directory: .next
+   Build command:        npm run pages:build
+   Build output directory: .vercel/output/static
    Root directory:       / (leave blank)
    ```
 

@@ -31,8 +31,8 @@ git push -u origin dojogenesis-com-mvp-a61a
 3. Authorize GitHub and select `dojogenesis-com-mvp`
 4. Configure build:
    - **Framework**: Next.js (SSR)
-   - **Build command**: `npm run build`
-   - **Build output**: `.next`
+   - **Build command**: `npm run pages:build`
+   - **Build output**: `.vercel/output/static`
 5. Add environment variables:
    - `OPENAI_API_KEY` = `your-actual-api-key` (Production)
    - `NODE_VERSION` = `20` (Production)

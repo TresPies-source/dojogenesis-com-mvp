@@ -51,8 +51,8 @@ This guide covers deploying the DojoGenesis.com MVP to Cloudflare Pages with the
    Project name: dojogenesis-com-mvp
    Production branch: main
    Framework preset: Next.js (should auto-detect)
-   Build command: npm run build
-   Build output directory: .next
+   Build command: npm run pages:build
+   Build output directory: .vercel/output/static
    Root directory: / (leave blank)
    Node version: 20
    ```

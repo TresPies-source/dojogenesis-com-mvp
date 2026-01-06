@@ -205,8 +205,8 @@ npm run test:e2e
    - Navigate to **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
    - Authorize GitHub and select your repository
    - Configure build settings:
-     - **Build command**: `npm run build`
-     - **Build output directory**: `.next`
+     - **Build command**: `npm run pages:build`
+     - **Build output directory**: `.vercel/output/static`
      - **Framework preset**: Next.js (auto-detected)
 
 3. **Configure Environment Variables**:

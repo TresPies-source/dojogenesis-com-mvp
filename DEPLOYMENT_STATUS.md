@@ -75,8 +75,8 @@ The following actions are **required** before post-deployment verification can b
 - [ ] Connect to GitHub and select repository
 - [ ] Configure build settings:
   - Framework: Next.js (SSR)
-  - Build command: `npm run build`
-  - Build output: `.next`
+  - Build command: `npm run pages:build`
+  - Build output: `.vercel/output/static`
 - [ ] Add environment variables:
   - `OPENAI_API_KEY`: Your production OpenAI API key
   - `NODE_VERSION`: `20`

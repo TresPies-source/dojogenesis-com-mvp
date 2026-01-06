@@ -177,8 +177,8 @@ git push -u origin main
 2. Go to **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
 3. Select GitHub repository
 4. Configure build:
-   - Build command: `npm run build`
-   - Build output: `.next`
+   - Build command: `npm run pages:build`
+   - Build output: `.vercel/output/static`
    - Framework: Next.js (auto-detect)
 5. Add environment variable:
    - `OPENAI_API_KEY` = `your-api-key-here` (encrypted)
