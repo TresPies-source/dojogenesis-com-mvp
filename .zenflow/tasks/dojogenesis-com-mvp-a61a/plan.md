@@ -329,8 +329,29 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Landing Page - Hero Component
+### [x] Step: Landing Page - Hero Component
 <!-- chat-id: 0c65329c-7d72-41d7-927d-fac579672921 -->
+
+✅ **Completed**: Created Hero component with required copy and responsive design.
+
+**Files Created**:
+- `/components/Hero.tsx` - Hero section component with Dojo Genesis value proposition
+
+**Implementation Details**:
+- Includes required copy: "Dojo Genesis helps you think by collecting perspectives before solutions. Bring a real situation. Add 3 lenses. Get a clean next move."
+- Clean, modern design using TailwindCSS
+- Fully responsive (mobile 320px, tablet 768px, desktop 1024px+)
+- Uses semantic HTML with proper heading hierarchy
+- Utilizes Tailwind's muted-foreground for secondary text
+- Centered layout with max-width constraint for readability
+- Responsive typography scaling (text-4xl to text-7xl for h1)
+
+**Verification**:
+- ✅ Hero component created with required copy
+- ✅ Responsive design with mobile-first approach
+- ✅ Clean, modern styling with TailwindCSS
+- ✅ No layout shift (static content, no dynamic loading)
+- ✅ Uses theme colors (muted-foreground) for consistency
 
 **Goal**: Create hero section with required copy and visual design.
 
@@ -408,6 +429,7 @@ Do not make assumptions on important decisions — get clarification first.
 ---
 
 ### [ ] Step: Playwright Smoke Test
+<!-- chat-id: 19132db5-b28b-49cf-bd87-cc8e56444d45 -->
 
 **Goal**: Write and configure automated smoke test.
 
