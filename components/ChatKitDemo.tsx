@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getOrCreateDeviceId } from '@/lib/device-id';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface SessionResponse {
   session_token: string;
@@ -92,13 +93,35 @@ export function ChatKitDemo() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[500px] bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg border border-gray-200">
-        <div className="text-center space-y-4">
-          <div className="relative w-12 h-12 mx-auto">
-            <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
-            <div className="absolute inset-0 border-4 border-t-blue-600 rounded-full animate-spin"></div>
+      <div 
+        data-testid="chatkit-demo" 
+        className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm p-6 space-y-4"
+        role="status"
+        aria-live="polite"
+        aria-label="Loading Dojo Genesis chat interface"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="space-y-2 flex-1">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-3 w-48" />
           </div>
-          <p className="text-gray-600 font-medium">Initializing Dojo Genesis...</p>
+        </div>
+        <div className="space-y-3">
+          <Skeleton className="h-16 w-full" />
+          <Skeleton className="h-16 w-3/4" />
+          <Skeleton className="h-16 w-5/6" />
+        </div>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center space-y-4">
+            <div className="relative w-12 h-12 mx-auto">
+              <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-t-primary rounded-full animate-spin"></div>
+            </div>
+            <p className="text-sm text-muted-foreground font-medium">
+              Preparing your Dojo Genesis session...
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -106,7 +129,7 @@ export function ChatKitDemo() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-[500px] bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200">
+      <div data-testid="chatkit-demo" className="flex items-center justify-center min-h-[500px] bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border border-red-200">
         <div className="text-center space-y-4 max-w-md px-6">
           <div className="w-16 h-16 mx-auto bg-red-100 rounded-full flex items-center justify-center">
             <svg
@@ -143,7 +166,7 @@ export function ChatKitDemo() {
   }
 
   return (
-    <div className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+    <div data-testid="chatkit-demo" className="w-full min-h-[600px] bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       <div id="chatkit-container" className="w-full h-full min-h-[600px]" />
     </div>
   );
