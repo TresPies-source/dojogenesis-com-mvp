@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getOrCreateDeviceId } from '@/lib/device-id';
+import { handleWidgetAction, logWidgetAction } from '@/lib/chatkit-actions';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface SessionResponse {
@@ -14,10 +15,22 @@ interface ErrorResponse {
   message: string;
 }
 
+declare global {
+  interface Window {
+    ChatKit?: {
+      render: (config: { container: HTMLElement; sessionToken: string }) => void;
+    };
+    widgets?: {
+      onAction: (handler: (action: { type: string }, itemId: string) => void) => void;
+    };
+  }
+}
+
 export function ChatKitDemo() {
   const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [deviceId, setDeviceId] = useState<string>('');
 
   useEffect(() => {
     async function initializeSession() {
@@ -25,18 +38,20 @@ export function ChatKitDemo() {
         setLoading(true);
         setError(null);
 
-        const deviceId = getOrCreateDeviceId();
+        const id = getOrCreateDeviceId();
         
-        if (!deviceId) {
+        if (!id) {
           throw new Error('Unable to generate device ID');
         }
+
+        setDeviceId(id);
 
         const response = await fetch('/api/chatkit/session', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId: deviceId }),
+          body: JSON.stringify({ userId: id }),
         });
 
         if (!response.ok) {
@@ -60,27 +75,75 @@ export function ChatKitDemo() {
   useEffect(() => {
     if (!sessionToken) return;
 
+    const setupWidgetHandlers = () => {
+      if (window.widgets) {
+        window.widgets.onAction((action: { type: string }, itemId: string) => {
+          logWidgetAction({
+            action: action.type,
+            itemId,
+            userId: deviceId,
+          });
+
+          const sendMessage = (message: string) => {
+            const inputElement = document.querySelector('input[type="text"]') as HTMLInputElement;
+            const textareaElement = document.querySelector('textarea') as HTMLTextAreaElement;
+            
+            if (inputElement) {
+              inputElement.value = message;
+              const event = new Event('input', { bubbles: true });
+              inputElement.dispatchEvent(event);
+              
+              const enterEvent = new KeyboardEvent('keydown', {
+                key: 'Enter',
+                code: 'Enter',
+                keyCode: 13,
+                bubbles: true,
+              });
+              inputElement.dispatchEvent(enterEvent);
+            } else if (textareaElement) {
+              textareaElement.value = message;
+              const event = new Event('input', { bubbles: true });
+              textareaElement.dispatchEvent(event);
+              
+              const enterEvent = new KeyboardEvent('keydown', {
+                key: 'Enter',
+                code: 'Enter',
+                keyCode: 13,
+                bubbles: true,
+              });
+              textareaElement.dispatchEvent(enterEvent);
+            } else {
+              console.warn('[ChatKit] Could not find input element to send message');
+            }
+          };
+
+          handleWidgetAction(action.type, itemId, sendMessage);
+        });
+      }
+    };
+
     const loadChatKit = () => {
       const container = document.getElementById('chatkit-container');
       if (!container) return;
 
-      if ((window as any).ChatKit) {
-        (window as any).ChatKit.render({
-          container,
-          sessionToken,
-        });
+      const renderChatKit = () => {
+        if (window.ChatKit) {
+          window.ChatKit.render({
+            container,
+            sessionToken,
+          });
+          
+          setTimeout(setupWidgetHandlers, 1500);
+        }
+      };
+
+      if (window.ChatKit) {
+        renderChatKit();
       } else {
         const script = document.createElement('script');
         script.src = 'https://chatkit.openai.com/v1/chatkit.js';
         script.async = true;
-        script.onload = () => {
-          if ((window as any).ChatKit) {
-            (window as any).ChatKit.render({
-              container,
-              sessionToken,
-            });
-          }
-        };
+        script.onload = renderChatKit;
         script.onerror = () => {
           setError('Failed to load ChatKit. Please check your connection and try again.');
         };
@@ -89,7 +152,7 @@ export function ChatKitDemo() {
     };
 
     loadChatKit();
-  }, [sessionToken]);
+  }, [sessionToken, deviceId]);
 
   if (loading) {
     return (
