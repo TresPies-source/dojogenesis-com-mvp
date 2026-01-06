@@ -6,12 +6,11 @@ This document maps each widget action type to its intended UX behavior in the Do
 
 | Action Type | Button Text | Intended Behavior | Implementation Strategy |
 |-------------|-------------|-------------------|------------------------|
-| `start_situation` | "Start with a real situation" | Prompts user to describe their current situation in the chat input | Insert prompt: "What situation are you facing?" into chat or send via `sendAction()` |
-| `add_perspectives` | "Add 3 perspectives" | Guides user to add three distinct perspectives/lenses to their situation | Insert prompt: "What are three different perspectives you could apply to this situation?" or trigger workflow step |
-| `show_example` | "Show me an example" | Demonstrates a complete Dojo Protocol flow with a sample scenario | Send pre-defined example scenario to workflow: "Show me an example of using the Dojo Protocol with a sample situation" |
-| `help_frame` | "I'm stuck—help me frame it" | Provides scaffolding questions to help user articulate their situation | Send to workflow: "I'm not sure how to frame my situation. Can you help me with some questions?" |
-| `generate_move` | "Generate a next move" | Synthesizes perspectives into an actionable next step | Send to workflow: "Based on the perspectives collected, what's a clear next move?" |
-| `pick_output` | "Pick an output" | Allows user to select output format (future: PDF, markdown, summary) | In MVP: Send to workflow: "How would you like to receive your output?" (Future: Open format picker UI) |
+| `dojo.onboard.start_situation` | "Start with a real situation" | Prompts user to describe their current situation in the chat input | Insert prompt: "What situation are you facing?" into chat or send via `sendAction()` |
+| `dojo.onboard.add_lenses` | "Add 3 perspectives" | Guides user to add three distinct perspectives/lenses to their situation | Insert prompt: "What are three different perspectives you could apply to this situation?" or trigger workflow step |
+| `dojo.onboard.show_example` | "Show me an example" | Demonstrates a complete Dojo Protocol flow with a sample scenario | Send pre-defined example scenario to workflow: "Show me an example of using the Dojo Protocol with a sample situation" |
+| `dojo.onboard.help_frame` | "I'm stuck — help me frame it" | Provides scaffolding questions to help user articulate their situation | Send to workflow: "I'm not sure how to frame my situation. Can you help me with some questions?" |
+| `dojo.onboard.generate_next_move` | "Generate a next move" | Synthesizes perspectives into an actionable next step | Send to workflow: "Based on the perspectives collected, what's a clear next move?" |
 
 ## Implementation Notes
 
@@ -20,23 +19,20 @@ This document maps each widget action type to its intended UX behavior in the Do
 ```typescript
 function handleWidgetAction(actionType: string, itemId: string) {
   const actionMap: Record<string, () => void> = {
-    start_situation: () => {
+    'dojo.onboard.start_situation': () => {
       sendMessageToChat("What situation are you facing?");
     },
-    add_perspectives: () => {
+    'dojo.onboard.add_lenses': () => {
       sendMessageToChat("What are three different perspectives you could apply to this situation?");
     },
-    show_example: () => {
+    'dojo.onboard.show_example': () => {
       sendMessageToChat("Show me an example of using the Dojo Protocol with a sample situation");
     },
-    help_frame: () => {
+    'dojo.onboard.help_frame': () => {
       sendMessageToChat("I'm not sure how to frame my situation. Can you help me with some questions?");
     },
-    generate_move: () => {
+    'dojo.onboard.generate_next_move': () => {
       sendMessageToChat("Based on the perspectives collected, what's a clear next move?");
-    },
-    pick_output: () => {
-      sendMessageToChat("How would you like to receive your output?");
     },
   };
 
@@ -75,9 +71,9 @@ All actions are logged to `/api/widget-action` for analytics (MVP: console loggi
 ## Future Enhancements
 
 ### V1 Improvements
-- **pick_output**: Implement actual format picker UI (PDF, Markdown, Plain Text)
 - **Action analytics**: Track which actions lead to completed flows
 - **Contextual actions**: Show/hide actions based on conversation state
+- **Output format picker**: Add UI for selecting output format (PDF, Markdown, Plain Text)
 
 ### V2 Possibilities
 - Custom action handlers per workflow
@@ -87,4 +83,4 @@ All actions are logged to `/api/widget-action` for analytics (MVP: console loggi
 ---
 
 **Last Updated**: 2026-01-06  
-**Status**: MVP Implementation Ready
+**Status**: Updated with namespaced action types
