@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 interface WidgetActionRequest {
   action: string;
   itemId?: string;

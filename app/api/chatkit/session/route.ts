@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 const CHATKIT_API_URL = 'https://api.openai.com/v1/chatkit/sessions';
 const WORKFLOW_ID = 'wf_69504ca5bd048190a8e10c1486defe7a07130d0df37f6b51';
 
