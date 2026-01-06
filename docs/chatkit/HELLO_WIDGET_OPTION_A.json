@@ -1,56 +1,136 @@
 {
-  "type": "card",
-  "id": "hello_agent_widget",
-  "title": "Welcome to Dojo Genesis",
-  "text": "Dojo Genesis helps you think by collecting perspectives before solutions. Bring a real situation. Add 3 lenses. Get a clean next move.",
-  "buttons": [
+  "type": "Card",
+  "key": "dojo_hello_agent_v1",
+  "size": "md",
+  "status": { "text": "Dojo Genesis • Hello Agent" },
+  "children": [
     {
-      "text": "Start with a real situation",
-      "action": {
-        "type": "start_situation",
-        "handler": "client"
-      },
-      "style": "primary"
+      "type": "Row",
+      "key": "header_row",
+      "align": "center",
+      "justify": "between",
+      "gap": 8,
+      "children": [
+        {
+          "type": "Title",
+          "key": "title",
+          "value": "Welcome to Dojo Genesis",
+          "size": "lg",
+          "weight": "bold"
+        },
+        {
+          "type": "Badge",
+          "key": "badge",
+          "label": "Perspectives → clarity",
+          "variant": "soft",
+          "color": "discovery",
+          "pill": true,
+          "size": "sm"
+        }
+      ]
     },
     {
-      "text": "Add 3 perspectives",
-      "action": {
-        "type": "add_perspectives",
-        "handler": "client"
-      },
-      "style": "secondary"
+      "type": "Markdown",
+      "key": "core_copy",
+      "value": "**Dojo Genesis helps you think by collecting perspectives before solutions.**\n\nBring a real situation. Add 3 lenses. Get a clean next move."
     },
     {
-      "text": "Show me an example",
-      "action": {
-        "type": "show_example",
-        "handler": "client"
-      },
-      "style": "secondary"
+      "type": "Divider",
+      "key": "divider_1",
+      "spacing": 10
     },
     {
-      "text": "I'm stuck—help me frame it",
-      "action": {
-        "type": "help_frame",
-        "handler": "client"
-      },
-      "style": "secondary"
+      "type": "Markdown",
+      "key": "micro_explain",
+      "value": "**How this works (fast):**\n\n- **Situation** (1–3 lines)\n- **3 lenses** (3 short bullets)\n- **Next move** (1–5 concrete steps)"
     },
     {
-      "text": "Generate a next move",
-      "action": {
-        "type": "generate_move",
-        "handler": "client"
-      },
-      "style": "primary"
+      "type": "Divider",
+      "key": "divider_2",
+      "spacing": 10
     },
     {
-      "text": "Pick an output",
-      "action": {
-        "type": "pick_output",
-        "handler": "client"
-      },
-      "style": "secondary"
+      "type": "Col",
+      "key": "button_stack",
+      "gap": 8,
+      "children": [
+        {
+          "type": "Button",
+          "key": "btn_start_situation",
+          "label": "Start with a real situation",
+          "variant": "solid",
+          "color": "primary",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.onboard.start_situation",
+            "payload": { "step": "situation" },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_add_lenses",
+          "label": "Add 3 perspectives",
+          "variant": "soft",
+          "color": "discovery",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.onboard.add_lenses",
+            "payload": { "step": "lenses", "count": 3 },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_show_example",
+          "label": "Show me an example",
+          "variant": "outline",
+          "color": "secondary",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.onboard.show_example",
+            "payload": { "example": "dojogenesis_hello_agent_v1" },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_help_frame",
+          "label": "I'm stuck — help me frame it",
+          "variant": "outline",
+          "color": "secondary",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.onboard.help_frame",
+            "payload": { "step": "framing" },
+            "loading": "container"
+          }
+        },
+        {
+          "type": "Button",
+          "key": "btn_next_move",
+          "label": "Generate a next move",
+          "variant": "soft",
+          "color": "success",
+          "size": "md",
+          "block": true,
+          "onClickAction": {
+            "type": "dojo.onboard.generate_next_move",
+            "payload": { "step": "next_move" },
+            "loading": "container"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Caption",
+      "key": "caption",
+      "value": "Tip: the "3 perspectives" step usually changes the answer more than any other input.",
+      "size": "sm"
     }
   ]
 }

@@ -7,6 +7,21 @@ interface ActionMapConfig {
 }
 
 const ACTION_CONFIG: ActionMapConfig = {
+  'dojo.onboard.start_situation': {
+    message: "What situation are you facing?",
+  },
+  'dojo.onboard.add_lenses': {
+    message: "What are three different perspectives you could apply to this situation?",
+  },
+  'dojo.onboard.show_example': {
+    message: "Show me an example of using the Dojo Protocol with a sample situation",
+  },
+  'dojo.onboard.help_frame': {
+    message: "I'm not sure how to frame my situation. Can you help me with some questions?",
+  },
+  'dojo.onboard.generate_next_move': {
+    message: "Based on the perspectives collected, what's a clear next move?",
+  },
   start_situation: {
     message: "What situation are you facing?",
   },
