@@ -19,21 +19,24 @@ export async function POST(request: NextRequest) {
   try {
     let apiKey: string | undefined;
     
-    try {
-      const { env } = getRequestContext();
-      apiKey = env.OPENAI_API_KEY;
-    } catch {
+    if (typeof getRequestContext === 'function') {
+      try {
+        const { env } = getRequestContext();
+        apiKey = env.OPENAI_API_KEY;
+      } catch (error) {
+        console.warn('[ChatKit Session] getRequestContext failed, using process.env fallback');
+      }
+    }
+    
+    if (!apiKey) {
       apiKey = process.env.OPENAI_API_KEY;
     }
     
     if (!apiKey) {
       console.error('[ChatKit Session] OPENAI_API_KEY not configured');
-      return new NextResponse(
-        JSON.stringify({ error: 'Server configuration error', message: 'API key not configured. Please contact support.' }),
-        { 
-          status: 500,
-          headers: { 'Content-Type': 'application/json' }
-        }
+      return NextResponse.json(
+        { error: 'Server configuration error', message: 'API key not configured. Please contact support.' },
+        { status: 500 }
       );
     }
 
@@ -121,12 +124,9 @@ export async function POST(request: NextRequest) {
       statusCode = 503;
     }
 
-    return new NextResponse(
-      JSON.stringify({ error: 'Internal server error', message: errorMessage }),
-      { 
-        status: statusCode,
-        headers: { 'Content-Type': 'application/json' }
-      }
+    return NextResponse.json(
+      { error: 'Internal server error', message: errorMessage },
+      { status: statusCode }
     );
   }
 }
