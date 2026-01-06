@@ -109,8 +109,29 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: ChatKit Session API Route
+### [x] Step: ChatKit Session API Route
 <!-- chat-id: b604fec3-4371-45f1-adfa-e88fdcbe8af2 -->
+
+✅ **Completed**: Implemented server-side API route for creating ChatKit sessions.
+
+**Files Created**:
+- `/app/api/chatkit/session/route.ts` - ChatKit session creation endpoint with comprehensive error handling
+
+**Implementation Details**:
+- POST handler validates `userId` field (returns 400 if missing)
+- Calls OpenAI ChatKit API with correct headers (`Authorization: Bearer`, `OpenAI-Beta: chatkit_beta=v1`)
+- Uses workflow ID: `wf_69504ca5bd048190a8e10c1486defe7a07130d0df37f6b51`
+- Error handling for: invalid API key (500), rate limits (429), network errors (503), malformed JSON (400)
+- Structured error logging with `[ChatKit Session]` prefix
+- No API key exposure in responses or client-accessible logs
+
+**Verification**:
+- ✅ Returns session token on success
+- ✅ Returns 400 if `userId` missing
+- ✅ Returns 500 if API key invalid (logged server-side)
+- ✅ Returns 503 if OpenAI API unreachable
+- ✅ Returns 429 on rate limit errors
+- ✅ No API key exposed in response or logs
 
 **Goal**: Implement server-side API route for creating ChatKit sessions.
 
