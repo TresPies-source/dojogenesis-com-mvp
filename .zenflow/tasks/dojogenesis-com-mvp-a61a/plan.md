@@ -264,8 +264,39 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Widget Action Handlers
+### [x] Step: Widget Action Handlers
 <!-- chat-id: 782df077-7ae3-489a-8647-649aeae89b7c -->
+
+✅ **Completed**: Implemented client-side widget action handlers for ChatKit integration.
+
+**Files Created**:
+- `/lib/chatkit-actions.ts` - Action mapping and logging utilities with handleWidgetAction() function
+  - Maps 6 action types to chat messages per ACTIONS_MAP.md
+  - Provides logWidgetAction() for server-side logging
+  - Handles unknown actions gracefully with warnings
+
+**Files Modified**:
+- `/components/ChatKitDemo.tsx` - Integrated widget action handling
+  - Added deviceId state management for action logging
+  - Implemented setupWidgetHandlers() function
+  - Set up widgets.onAction listener after ChatKit renders
+  - Handles message sending via multiple ChatKit API methods (sendMessage/input)
+  - Logs all actions to /api/widget-action endpoint
+- `/next.config.js` - Clean config (reverted experimental changes)
+
+**Implementation Details**:
+- All 6 widget buttons mapped: start_situation, add_perspectives, show_example, help_frame, generate_move, pick_output
+- Actions trigger chat messages that are sent to the ChatKit workflow
+- Server-side action logging for analytics (async, non-blocking)
+- Graceful fallbacks for different ChatKit API versions
+- Comprehensive error handling and console logging
+
+**Verification**:
+- ✅ Build succeeds with no TypeScript errors
+- ✅ Dev server runs successfully
+- ✅ Action handlers properly typed and implemented
+- ✅ Error handling for missing ChatKit APIs
+- ✅ Logging integration complete
 
 **Goal**: Implement client-side action handling for Hello Agent widget buttons.
 
