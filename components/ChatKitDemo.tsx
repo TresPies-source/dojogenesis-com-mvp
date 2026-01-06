@@ -55,8 +55,17 @@ export function ChatKitDemo() {
         });
 
         if (!response.ok) {
-          const errorData: ErrorResponse = await response.json();
-          throw new Error(errorData.message || 'Failed to create session');
+          let errorMessage = 'Failed to create session';
+          try {
+            const errorData: ErrorResponse = await response.json();
+            errorMessage = errorData.message || errorMessage;
+          } catch (e) {
+            const text = await response.text().catch(() => '');
+            if (text) {
+              errorMessage = `Server error: ${text.substring(0, 100)}`;
+            }
+          }
+          throw new Error(errorMessage);
         }
 
         const data: SessionResponse = await response.json();
