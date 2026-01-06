@@ -15,7 +15,7 @@
 ### 2. Push Code (1 minute)
 ```bash
 # Replace YOUR_USERNAME with your GitHub username
-git remote add origin https://github.com/YOUR_USERNAME/dojogenesis-com-mvp.git
+git remote add origin https://github.com/TresPies-source/dojogenesis-com-mvp.git
 
 # Commit any pending changes
 git add .
