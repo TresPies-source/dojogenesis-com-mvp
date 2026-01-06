@@ -75,7 +75,7 @@ This document specifies the technical implementation of DojoGenesis.com MVP—a 
 - **TypeScript** - Compile-time type checking
 
 ### Deployment
-- **Vercel** - Hosting and deployment
+- **Cloudflare Pages** - Hosting and deployment (Next.js support with edge runtime)
 - **GitHub** - Source control
 
 ## Routes and API Endpoints
@@ -409,59 +409,111 @@ console.error('[Widget Action Error]', { action, itemId, error });
 
 ## Deployment
 
-### Vercel Configuration
+### Cloudflare Pages Configuration
+
+**Why Cloudflare Pages**:
+- Full Next.js support including App Router and API routes
+- Edge runtime for serverless functions (API routes)
+- Free tier with unlimited requests and bandwidth
+- Fast global CDN with 300+ locations
+- Automatic HTTPS with custom domains
+- GitHub integration with preview deployments
 
 **Build Settings**:
 - **Framework**: Next.js
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next` (default)
 - **Install Command**: `npm install`
-- **Node Version**: 18.x or 20.x
+- **Node Version**: 18 or 20
+- **Runtime**: Next.js on Pages (automatic detection)
 
-**Environment Variables** (set in Vercel dashboard):
-- `OPENAI_API_KEY` (secret)
+**Environment Variables** (set in Cloudflare Pages dashboard):
+- `OPENAI_API_KEY` (secret, encrypted)
 - `NEXT_PUBLIC_SITE_URL` (optional)
+- `NODE_VERSION=20` (optional, defaults to 18)
 
 **Custom Domain**:
-1. Add `dojogenesis.com` in Vercel Domains
-2. Configure DNS A/CNAME records to Vercel
-3. SSL certificate auto-provisioned by Vercel
+1. Add `dojogenesis.com` in Cloudflare Pages → Custom Domains
+2. If domain managed by Cloudflare DNS: automatic configuration
+3. If external DNS: Add CNAME record pointing to Cloudflare Pages
+4. SSL certificate auto-provisioned (immediate)
 
 ### GitHub Integration
 
-- **Repository**: Link GitHub repo to Vercel project
+- **Repository**: Link GitHub repo to Cloudflare Pages project
 - **Branch**: `main` → production deployment
-- **Pull Requests**: Optional preview deployments
+- **Pull Requests**: Automatic preview deployments (preview-*.pages.dev)
 
 ### Deployment Steps
 
-1. **Setup Vercel Project**:
+1. **Prepare Repository**:
    ```bash
-   npx vercel login
-   npx vercel link
+   git init
+   git add .
+   git commit -m "Initial commit: DojoGenesis.com MVP"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/dojogenesis-com-mvp.git
+   git push -u origin main
    ```
 
-2. **Configure Environment Variables**:
-   ```bash
-   npx vercel env add OPENAI_API_KEY production
-   # Paste your API key when prompted
-   ```
+2. **Create Cloudflare Pages Project**:
+   - Visit [Cloudflare Dashboard](https://dash.cloudflare.com)
+   - Navigate to Workers & Pages → Create → Pages → Connect to Git
+   - Authorize GitHub and select repository
+   - Configure build settings:
+     - **Build command**: `npm run build`
+     - **Build output directory**: `.next`
+     - **Framework preset**: Next.js (auto-detected)
 
-3. **Deploy**:
+3. **Configure Environment Variables**:
+   - In Cloudflare Pages project settings → Environment Variables
+   - Add `OPENAI_API_KEY` (production environment)
+   - Mark as encrypted (secret)
+   - Add same variable for preview environment if needed
+
+4. **Deploy**:
    ```bash
    git push origin main
-   # Vercel auto-deploys on push to main
+   # Cloudflare Pages auto-deploys on push to main
    ```
 
-4. **Verify Deployment**:
-   - Visit deployment URL
+5. **Verify Deployment**:
+   - Visit deployment URL (*.pages.dev)
    - Test chat initialization
-   - Check Vercel logs for errors
+   - Check Cloudflare Pages logs for errors
+   - Test API routes (/api/chatkit/session)
 
-5. **Connect Custom Domain**:
-   - Vercel Dashboard → Domains → Add `dojogenesis.com`
-   - Update DNS records as instructed
-   - Wait for SSL provisioning (usually < 10 minutes)
+6. **Connect Custom Domain**:
+   - Cloudflare Pages Dashboard → Custom Domains → Add domain
+   - Enter `dojogenesis.com`
+   - If using Cloudflare DNS: Click "Activate Domain" (automatic setup)
+   - If external DNS: Add CNAME record: `dojogenesis.com` → `your-project.pages.dev`
+   - SSL provisioning is immediate (Cloudflare Universal SSL)
+
+### Cloudflare Pages Configuration File (Optional)
+
+Create `wrangler.toml` for advanced configuration:
+
+```toml
+name = "dojogenesis-com-mvp"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+```
+
+### Alternative: Wrangler CLI Deployment
+
+```bash
+# Install Wrangler CLI
+npm install -g wrangler
+
+# Login to Cloudflare
+wrangler login
+
+# Deploy directly
+wrangler pages deploy .next --project-name=dojogenesis-com-mvp
+```
 
 ## Test Plan
 

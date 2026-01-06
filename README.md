@@ -179,37 +179,72 @@ npm run test:e2e
 
 ## Deployment
 
-### Deploy to Vercel
+### Deploy to Cloudflare Pages
 
-#### Option 1: Vercel CLI
+**Why Cloudflare Pages?**
+- Full Next.js support with App Router and API routes
+- Free tier with unlimited requests and bandwidth
+- Global CDN with 300+ locations
+- Instant SSL provisioning
+- GitHub integration with automatic deployments
+
+#### Option 1: GitHub Integration (Recommended)
+
+1. **Push code to GitHub**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/dojogenesis-com-mvp.git
+   git push -u origin main
+   ```
+
+2. **Create Cloudflare Pages Project**:
+   - Visit https://dash.cloudflare.com
+   - Navigate to **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
+   - Authorize GitHub and select your repository
+   - Configure build settings:
+     - **Build command**: `npm run build`
+     - **Build output directory**: `.next`
+     - **Framework preset**: Next.js (auto-detected)
+
+3. **Configure Environment Variables**:
+   - In Cloudflare Pages project settings → **Environment Variables**
+   - Add `OPENAI_API_KEY` with your API key (mark as encrypted)
+   - Optionally add `NODE_VERSION=20`
+
+4. **Deploy**:
+   - Push to `main` branch triggers automatic deployment
+   - View deployment at `your-project.pages.dev`
+
+#### Option 2: Wrangler CLI
 
 ```bash
-# Install Vercel CLI (if not already installed)
-npm i -g vercel
+# Install Wrangler CLI globally
+npm install -g wrangler
 
-# Login to Vercel
-vercel login
+# Login to Cloudflare
+wrangler login
 
-# Deploy to production
-vercel --prod
+# Build the project
+npm run build
+
+# Deploy to Cloudflare Pages
+wrangler pages deploy .next --project-name=dojogenesis-com-mvp
 ```
-
-#### Option 2: GitHub Integration
-
-1. Push code to GitHub repository
-2. Visit https://vercel.com/new
-3. Import your GitHub repository
-4. Configure environment variables in Vercel dashboard:
-   - Add `OPENAI_API_KEY` with your API key
-5. Deploy
 
 ### Custom Domain Setup
 
-1. In Vercel dashboard, go to **Settings → Domains**
-2. Add domain: `dojogenesis.com`
-3. Configure DNS records as instructed by Vercel
-4. Wait for DNS propagation and SSL provisioning
-5. Verify site accessible at https://dojogenesis.com
+1. In Cloudflare Pages dashboard, navigate to your project → **Custom Domains**
+2. Click **Set up a custom domain**
+3. Enter: `dojogenesis.com`
+4. **If using Cloudflare DNS**: Click "Activate Domain" (automatic setup)
+5. **If using external DNS**: Add CNAME record:
+   - Name: `dojogenesis.com`
+   - Target: `your-project.pages.dev`
+6. SSL provisioning is immediate with Cloudflare Universal SSL
+7. Verify site accessible at https://dojogenesis.com
 
 ---
 
@@ -231,7 +266,7 @@ vercel --prod
 - **UI Components**: shadcn/ui + Radix UI primitives
 - **ChatKit**: @openai/chatkit-react v1.4.0
 - **Testing**: Playwright
-- **Deployment**: Vercel
+- **Deployment**: Cloudflare Pages
 
 ---
 

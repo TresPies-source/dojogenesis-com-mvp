@@ -720,60 +720,69 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Vercel Deployment Setup
+### [ ] Step: Cloudflare Pages Deployment Setup
 
-**Goal**: Deploy application to Vercel and configure production environment.
+**Goal**: Deploy application to Cloudflare Pages and configure production environment.
 
 **Tasks**:
 1. Create GitHub repository (if not already created)
 2. Push code to GitHub: `git push origin main`
-3. Create Vercel project:
-   - `npx vercel login`
-   - `npx vercel link` (connect to GitHub repo)
-4. Configure environment variables in Vercel dashboard:
-   - `OPENAI_API_KEY` (secret)
-5. Deploy to production: `npx vercel --prod`
-6. Verify deployment URL works
+3. Create Cloudflare Pages project:
+   - Visit https://dash.cloudflare.com
+   - Navigate to Workers & Pages → Create → Pages → Connect to Git
+   - Authorize GitHub and select repository
+   - Configure build settings:
+     - Build command: `npm run build`
+     - Build output directory: `.next`
+     - Framework preset: Next.js (auto-detected)
+4. Configure environment variables in Cloudflare Pages dashboard:
+   - Add `OPENAI_API_KEY` (production environment, encrypted)
+   - Add `NODE_VERSION=20` (optional)
+5. Deploy: Push to main triggers automatic deployment
+6. Verify deployment URL works (*.pages.dev)
 
 **Verification**:
 - [ ] Code pushed to GitHub
-- [ ] Vercel project created and linked
-- [ ] Environment variables configured in Vercel
+- [ ] Cloudflare Pages project created and linked
+- [ ] Environment variables configured in Cloudflare Pages
 - [ ] Deployment succeeds
-- [ ] Site accessible at Vercel preview URL
+- [ ] Site accessible at Cloudflare Pages URL (*.pages.dev)
 - [ ] Chat initializes correctly on deployed site
+- [ ] API routes functional (/api/chatkit/session)
 
 **External Actions** (not code changes):
 - GitHub repository creation
-- Vercel project setup
+- Cloudflare Pages project setup
 - Environment variable configuration
 
 ---
 
 ### [ ] Step: Custom Domain Configuration
 
-**Goal**: Connect DojoGenesis.com domain to Vercel deployment.
+**Goal**: Connect DojoGenesis.com domain to Cloudflare Pages deployment.
 
 **Tasks**:
-1. In Vercel dashboard:
-   - Navigate to project settings → Domains
-   - Add domain: `dojogenesis.com`
-   - Note DNS configuration instructions
-2. Configure DNS records:
-   - Add A or CNAME record as instructed by Vercel
-3. Wait for DNS propagation and SSL provisioning
+1. In Cloudflare Pages dashboard:
+   - Navigate to project → Custom Domains
+   - Click "Set up a custom domain"
+   - Enter: `dojogenesis.com`
+2. Configure DNS:
+   - **If using Cloudflare DNS**: Click "Activate Domain" (automatic setup)
+   - **If using external DNS**: Add CNAME record: `dojogenesis.com` → `your-project.pages.dev`
+3. SSL provisioning (immediate with Cloudflare Universal SSL)
 4. Verify site accessible at https://dojogenesis.com
 
 **Verification**:
-- [ ] Domain added in Vercel
+- [ ] Domain added in Cloudflare Pages
 - [ ] DNS records configured correctly
-- [ ] SSL certificate provisioned (https:// works)
+- [ ] SSL certificate active (https:// works immediately)
 - [ ] Site loads at https://dojogenesis.com
 - [ ] No certificate warnings
+- [ ] Both www and non-www redirect properly (if configured)
 
 **External Actions**:
-- DNS configuration (domain registrar)
-- Vercel domain setup
+- DNS configuration (if not using Cloudflare DNS)
+- Cloudflare Pages domain setup
 
 ---
 
@@ -791,7 +800,7 @@ Do not make assumptions on important decisions — get clarification first.
 3. Test on multiple devices/browsers:
    - Desktop: Chrome, Firefox, Safari
    - Mobile: iOS Safari, Android Chrome
-4. Check Vercel logs for errors
+4. Check Cloudflare Pages logs for errors
 5. Run Lighthouse audit on production URL
 6. Verify analytics/logging working (if implemented)
 
@@ -801,9 +810,10 @@ Do not make assumptions on important decisions — get clarification first.
 - [ ] All 6 widget buttons work
 - [ ] Mobile responsive on real devices
 - [ ] No console errors in production
-- [ ] No 5xx errors in Vercel logs
+- [ ] No 5xx errors in Cloudflare Pages logs
 - [ ] Lighthouse score > 85 on production
 - [ ] SSL certificate valid
+- [ ] Edge functions (API routes) working correctly
 
 **No New Files** (verification step only)
 

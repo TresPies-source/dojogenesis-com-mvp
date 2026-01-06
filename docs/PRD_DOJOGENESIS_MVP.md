@@ -107,7 +107,7 @@ Each button triggers a specific interaction pathway designed to guide users thro
 
 - **Repository**: GitHub (public or private TBD)
 - **Domain**: DojoGenesis.com
-- **Platform**: Vercel
+- **Platform**: Cloudflare Pages (Next.js support with edge runtime, free tier)
 - **Environment**: Production-ready with proper env var configuration
 
 ## Key User Flows
@@ -155,6 +155,7 @@ Each button triggers a specific interaction pathway designed to guide users thro
 - Lighthouse performance score > 85
 - Zero security vulnerabilities in dependencies
 - Successful Playwright smoke test on every deployment
+- API routes functional on Cloudflare Pages edge runtime
 
 ## Analytics Events (Minimal)
 
@@ -176,7 +177,7 @@ Implementation note: Use console logging in MVP, prepare structure for future an
 | Slow ChatKit response times | Medium - Poor UX | Show loading states; optimize session creation |
 | Users don't understand the value proposition | High - No engagement | A/B test copy; include "Show me an example" as default first action |
 | Security: API keys leaked | Critical | Code review; .gitignore enforcement; env var validation in CI |
-| Domain/deployment issues | Medium - Launch delay | Set up Vercel + domain early; dry-run deployment |
+| Domain/deployment issues | Medium - Launch delay | Set up Cloudflare Pages + domain early; dry-run deployment |
 
 ## Phased Roadmap
 
@@ -212,7 +213,7 @@ Implementation note: Use console logging in MVP, prepare structure for future an
 - [ ] .env.example file created with required variables
 - [ ] One Playwright smoke test passes
 - [ ] README with setup and deployment instructions
-- [ ] Vercel deployment configuration complete
+- [ ] Cloudflare Pages deployment configuration complete
 - [ ] Custom domain DojoGenesis.com connected
 - [ ] Mobile responsive design verified on 3 devices/sizes
 - [ ] Error states tested (network failure, session creation failure)
