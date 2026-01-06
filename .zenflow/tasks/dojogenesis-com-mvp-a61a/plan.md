@@ -162,7 +162,10 @@ Do not make assumptions on important decisions — get clarification first.
 
 ---
 
-### [ ] Step: Widget Action Logging API Route
+### [x] Step: Widget Action Logging API Route
+<!-- chat-id: 0e51d785-def4-4661-aa62-64bba6651f30 -->
+
+✅ **Completed**: Implemented stub endpoint for logging widget actions.
 
 **Goal**: Create stub endpoint for logging widget actions (future-proofing).
 
@@ -185,6 +188,7 @@ Do not make assumptions on important decisions — get clarification first.
 ---
 
 ### [ ] Step: shadcn/ui Components Installation
+<!-- chat-id: e7418224-098d-4105-b16c-00ee7e5072a4 -->
 
 **Goal**: Install required UI components from shadcn/ui library.
 
@@ -208,6 +212,7 @@ Do not make assumptions on important decisions — get clarification first.
 ---
 
 ### [ ] Step: ChatKit Integration Component
+<!-- chat-id: 92d2e6f9-a5d4-408f-8106-57c40b8f3cc7 -->
 
 **Goal**: Build the core ChatKit demo component with session management.
 
