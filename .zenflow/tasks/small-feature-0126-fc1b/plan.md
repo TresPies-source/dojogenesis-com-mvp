@@ -18,7 +18,8 @@ Do not make assumptions on important decisions — get clarification first.
 
 ## Workflow Steps
 
-### [ ] Step: Technical Specification
+### [x] Step: Technical Specification
+<!-- chat-id: f878f64a-b1aa-48f4-91da-04e785e9efda -->
 
 Assess the task's difficulty, as underestimating it leads to poor outcomes.
 - easy: Straightforward implementation, trivial bug fix or feature
@@ -50,15 +51,74 @@ Save to `{@artifacts_path}/plan.md`. If the feature is trivial and doesn't warra
 
 ---
 
-### [ ] Step: Implementation
+### [ ] Step: Create Container Size Hook
 
-Implement the task according to the technical specification and general engineering best practices.
+Create `lib/use-container-size.ts` with:
+- Type definitions for ContainerSize
+- Custom hook that manages size state
+- localStorage persistence logic
+- cycleSize function to rotate through sizes
+- Proper SSR handling with useEffect
 
-1. Break the task into steps where possible.
-2. Implement the required changes in the codebase.
-3. Add and run relevant tests and linters.
-4. Perform basic manual verification if applicable.
-5. After completion, write a report to `{@artifacts_path}/report.md` describing:
-   - What was implemented
-   - How the solution was tested
-   - The biggest issues or challenges encountered
+**Verification**: TypeScript compiles without errors, hook exports correct types and functions.
+
+---
+
+### [ ] Step: Create Container Size Selector Component
+
+Create `components/ContainerSizeSelector.tsx` with:
+- Client component directive
+- Button UI to display and cycle through sizes
+- Visual indicators (icons/text) for each size
+- Uses the useContainerSize hook
+- Accessible keyboard navigation
+- Follows existing UI patterns (shadcn/ui Button component)
+
+**Verification**: Component renders correctly, button cycles through all 4 sizes.
+
+---
+
+### [ ] Step: Integrate Size Selector into Main Page
+
+Modify `app/page.tsx` to:
+- Import ContainerSizeSelector and useContainerSize
+- Add size selector UI above ChatKitDemo
+- Apply dynamic container classes based on selected size
+- Ensure proper layout and styling
+- Make page a client component
+
+**Verification**: Size selector appears on page, clicking changes demo container width visually.
+
+---
+
+### [ ] Step: Test and Verify Implementation
+
+1. Run lint and type checking: `npm run lint` and `npm run build`
+2. Test all size modes (Mobile, Tablet, Desktop, Fullscreen)
+3. Test localStorage persistence (refresh page)
+4. Test responsive behavior on different viewports
+5. Test keyboard accessibility
+6. Run e2e tests if applicable: `npm run test:e2e`
+
+**Verification**: All tests pass, no lint errors, feature works as expected.
+
+---
+
+### [ ] Step: Write Implementation Report
+
+Create `{@artifacts_path}/report.md` documenting:
+- What was implemented
+- How the solution was tested
+- Any challenges or decisions made
+- Screenshots or descriptions of the feature in action
+
+---
+
+### [ ] Step: Merge to Main
+
+After all verification passes:
+1. Review all changes
+2. Commit changes with descriptive message
+3. Merge to main branch as requested
+
+**Verification**: Changes successfully merged to main.
