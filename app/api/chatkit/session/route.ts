@@ -20,9 +20,12 @@ export async function POST(request: NextRequest) {
     
     if (!apiKey) {
       console.error('[ChatKit Session] OPENAI_API_KEY not configured');
-      return NextResponse.json(
-        { error: 'Server configuration error', message: 'We\'re experiencing technical difficulties. Please try again later.' },
-        { status: 500 }
+      return new NextResponse(
+        JSON.stringify({ error: 'Server configuration error', message: 'API key not configured. Please contact support.' }),
+        { 
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        }
       );
     }
 
@@ -97,23 +100,25 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[ChatKit Session] Unexpected error:', error);
     
+    let errorMessage = 'Something unexpected happened. Please refresh the page and try again.';
+    let statusCode = 500;
+    
     if (error instanceof SyntaxError) {
-      return NextResponse.json(
-        { error: 'Invalid request', message: 'Something went wrong. Please refresh the page and try again.' },
-        { status: 400 }
-      );
+      errorMessage = 'Something went wrong. Please refresh the page and try again.';
+      statusCode = 400;
     }
 
     if (error instanceof TypeError && error.message.includes('fetch')) {
-      return NextResponse.json(
-        { error: 'Network error', message: 'Unable to connect to the AI service. Please check your internet connection and try again.' },
-        { status: 503 }
-      );
+      errorMessage = 'Unable to connect to the AI service. Please check your internet connection and try again.';
+      statusCode = 503;
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error', message: 'Something unexpected happened. Please refresh the page and try again.' },
-      { status: 500 }
+    return new NextResponse(
+      JSON.stringify({ error: 'Internal server error', message: errorMessage }),
+      { 
+        status: statusCode,
+        headers: { 'Content-Type': 'application/json' }
+      }
     );
   }
 }
