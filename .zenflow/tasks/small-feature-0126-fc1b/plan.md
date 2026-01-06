@@ -80,7 +80,8 @@ Create `components/ContainerSizeSelector.tsx` with:
 
 ---
 
-### [ ] Step: Integrate Size Selector into Main Page
+### [x] Step: Integrate Size Selector into Main Page
+<!-- chat-id: ea6df68a-b781-4f17-8dbc-4ac8b45743be -->
 
 Modify `app/page.tsx` to:
 - Import ContainerSizeSelector and useContainerSize
