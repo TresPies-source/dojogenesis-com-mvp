@@ -11,7 +11,7 @@ export function Footer() {
           </p>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Dojo Genesis. Part of the Dojo Protocol
-            ecosystem.
+            ecosystem. • MVP v1.0
           </p>
         </div>
       </div>
