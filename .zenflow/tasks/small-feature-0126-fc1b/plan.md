@@ -128,3 +128,9 @@ After all verification passes:
 3. Merge to main branch as requested
 
 **Verification**: Changes successfully merged to main.
+
+### [x] Step: Review implementation and finish publishing fix
+<!-- chat-id: ddd70f05-57c3-4c9a-90fa-9e50d1166686 -->
+<!-- agent: ZEN_CLI -->
+
+add small ui update to verify fix

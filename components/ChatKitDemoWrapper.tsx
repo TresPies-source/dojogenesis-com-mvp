@@ -17,7 +17,8 @@ export function ChatKitDemoWrapper() {
   return (
     <>
       <div className="flex flex-col gap-4 mb-6">
-        <div className="flex justify-end">
+        <div className="flex justify-end items-center gap-3">
+          <span className="text-sm text-muted-foreground">Container Size:</span>
           <ContainerSizeSelector />
         </div>
       </div>
